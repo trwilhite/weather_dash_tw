@@ -1,5 +1,3 @@
-var currentContainerEl = document.getElementById("current");
-
 function searchCity () {
     var cityInput = document.getElementById("cityInput").value.trim();
     console.log(cityInput);
@@ -37,40 +35,35 @@ function uviForecast (lat, lon) {
             console.log(response);
             response.json().then(function(data) {
                 console.log(data);
+                displayUviForecast(data);
             });
         } else {
             alert("City Not Found. Please Search a Valid City Name.")
         }
         
     });
+};
+
+function displayCurrent (data, cityInput) {
+    $("#cityName").text(cityInput + " (" + new Date().toLocaleDateString() + ")");
+    $("#icon").attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
+    $("#temp").text(data.main.temp);
+    $("#wind").text(data.wind.speed);
+    $("#humidity").text(data.main.humidity);
+};
+
+function displayUviForecast (data) {
+    $("#uvi").text(data.current.uvi);
+    if (data.current.uvi <= 2) {
+        $("#uvi").addClass("bg-success");
+    } else if (data.current.uvi <= 7) {
+        $("#uvi").addClass("bg-warning");
+    } else {
+        $("#uvi").addClass("bg-danger");
+    };
+
+    $
 }
 
-function displayCurrent (cityInput) {
-    // var iconUrl = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
-    // var currentDate = data.dt * 1000;
-
-    var currentContainer = $("<div></div>");
-    var currentBody = $("<div></div>");
-    var currentHeader = $("<h3></h3>").text("hello")
-    // var currentTemp = $("<p></p>");
-    // var currentWind = $("<p></p>");
-    // var currentHumidity = $("<p></p>");
-    // var currentUvi = $("<p></p>");
-
-    $(currentContainer).attr("class", "card");
-    $(currentBody).attr("class", "card-body");
-    $(currentBody).attr("id", "currentBody");
-    $(currentHeader).attr("class", "card-title");
-    // $(currentTemp).attr("class", "card-text");
-    // $(currentWind).attr("class", "card-text");
-    // $(currentHumidity).attr("class", "card-text");
-    // $(currentUvi).attr("class", "card-text");
-
-    // $(currentHeader).text(cityInput, currentDate, iconUrl)
-
-    currentContainer.append(currentBody);
-    currentBody.append(currentHeader);
-    currentContainerEl.append(currentContainer);
-}
 
 $("#searchBtn").on("click", searchCity);
