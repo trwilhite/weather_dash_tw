@@ -62,7 +62,14 @@ function displayUviForecast (data) {
         $("#uvi").addClass("bg-danger");
     };
 
-    $
+    for (let i = 1; i <= 5; i++) {
+        var forecastDate = data.daily[i].dt * 1000;
+        $("#day-" + i).text(new Date(forecastDate).toLocaleDateString());
+        $("#iconDay-" + i).attr("src", "https://openweathermap.org/img/w/" + data.daily[i].weather.icon + ".png");
+        $("#tempDay-" + i).text(data.daily[i].temp.day);
+        $("#windDay-" + i).text(data.daily[i].wind_speed);
+        $("#humidityDay-" + i).text(data.daily[i].humidity);
+    }
 }
 
 
