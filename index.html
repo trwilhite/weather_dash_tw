@@ -10,19 +10,76 @@
     </head>
     <body>
         <header class="bg-primary">
-            <h1 class="text-center text-light p-3">Weather Dashboard</h1>
+            <h1 class="p-3 text-light text-center">Weather Dashboard</h1>
         </header>
+        
         <main class="row container d-flex flex-row justify-content-between">
-            <div class="col-3 border-bottom">
+            <div class="col-3">
                 <h2>Search for a City:</h2>
-                <form class="p-1">
-                    <input type="text" id="cityInput" class="col-md-12 m-1" placeholder="Washington D.C.">
-                    <button type="button" id="searchBtn" class="col-md-12 m-1 btn btn-primary">Search</button>    
+                <form>
+                    <input type="text" id="cityInput" class="col-12 m-1" placeholder="Washington D.C.">
+                    <button type="button" id="searchBtn" class="col-12 m-1 btn btn-primary">Search</button>    
                 </form>
             </div>
             <div class="col-9">
-                <div id="current"></div>
-                <div id="forecast" class="col-12"></div>
+                <div class="card">
+                    <div class="card-body border border-secondary">
+                        <h2 class="card-title" id="cityName"></h2>
+                        <img id="icon">
+                        <p>Temp: <span id="temp"></span>°F</p>
+                        <p>Wind: <span id="wind"></span>MPH</p>
+                        <p>Humidity: <span id="humidity"></span>%</p>
+                        <p>UV Index: <span id="uvi"></span></p>
+                    </div>
+                </div>
+
+                <div class="col-md-12 card">
+                    <div class="card-body">
+                        <h2 class="card-title">5-Day Forecast:</h2>
+                        <div class="d-flex justify-content-between">
+                            <div class="p-3 bg-primary text-light">
+                                <h3 id="dayOne"></h3>
+                                <img id="iconDayOne">
+                                <p>Temp: <span id="tempDayOne"></span>°F</p>
+                                <p>Wind: <span id="windDayOne"></span>MPH</p>
+                                <p>Humidity: <span id="humidityDayOne"></span>%</p>
+                                <p>UV Index: <span id="uviDayOne"></span></p>        
+                            </div>
+                            <div class="p-3 bg-primary text-light">
+                                <h3 id="dayTwo"></h3>
+                                <img id="iconDayTwo">
+                                <p>Temp: <span id="tempDayTwo"></span>°F</p>
+                                <p>Wind: <span id="windDayTwo"></span>MPH</p>
+                                <p>Humidity: <span id="humidityDayTwo"></span>%</p>
+                                <p>UV Index: <span id="uviDayTwo"></span></p>        
+                            </div>
+                            <div class="p-3 bg-primary text-light">
+                                <h3 id="dayThree"></h3>
+                                <img id="iconDayThree">
+                                <p>Temp: <span id="tempDayThree"></span>°F</p>
+                                <p>Wind: <span id="windDayThree"></span>MPH</p>
+                                <p>Humidity: <span id="humidityDayThree"></span>%</p>
+                                <p>UV Index: <span id="uviDayThree"></span></p>        
+                            </div>
+                            <div class="p-3 bg-primary text-light">
+                                <h3 id="dayFour"></h3>
+                                <img id="iconDayFour">
+                                <p>Temp: <span id="tempDayFour"></span>°F</p>
+                                <p>Wind: <span id="windDayFour"></span>MPH</p>
+                                <p>Humidity: <span id="humidityDayFour"></span>%</p>
+                                <p>UV Index: <span id="uviDayFour"></span></p>        
+                            </div>
+                            <div class="p-3 bg-primary text-light">
+                                <h3 id="dayFive"></h3>
+                                <img id="iconDayFive">
+                                <p>Temp: <span id="tempDayFive"></span>°F</p>
+                                <p>Wind: <span id="windDayFive"></span>MPH</p>
+                                <p>Humidity: <span id="humidityDayFive"></span>%</p>
+                                <p>UV Index: <span id="uviDayFive"></span></p>        
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
 
