@@ -21,6 +21,8 @@ $(document).ready(function () {
                     displayCurrent(data, cityInput);
                     uviForecast(data.coord.lat, data.coord.lon);
                     saveSearches(cityInput);
+                    $(".recent-btn").remove();
+                    displaySearches();            
                 });
                 // if the resopnse is not OK then it wil return an error to the user prompting them to try again
             } else {
@@ -64,12 +66,15 @@ $(document).ready(function () {
         $("#uvi").text(data.current.uvi);
         if (data.current.uvi <= 2) {
             // if UVI is less than or equal to 2, the background will be green
+            $("#uvi").removeClass("bg-danger bg-warning");
             $("#uvi").addClass("bg-success");
         } else if (data.current.uvi <= 7) {
             // if UVI is 3-7, backgrounf will be yellow
+            $("#uvi").removeClass("bg-success bg-danger");
             $("#uvi").addClass("bg-warning");
         } else {
             // if UVI is above 7 it will be red
+            $("#uvi").removeClass("bg-success bg-warning");
             $("#uvi").addClass("bg-danger");
         };
 
@@ -86,6 +91,7 @@ $(document).ready(function () {
         }
     };
 
+    // help from Marissa Wilhite on saving searches to local storage 
     function saveSearches(cityInput) {
         var recentSearches = JSON.parse(localStorage.getItem("city"));
 
@@ -98,10 +104,11 @@ $(document).ready(function () {
         }
 
         // if there are more than 8 items in the local storage array, it will 'pop', so there are only max 8 recent search buttons on page
-        if(recentSearches > 7) {
+        if(recentSearches.length > 7) {
             recentSearches.pop();
         }
 
+        // will only save the search to local storage if it does not already exist in the array
         if(!recentSearches.includes(cityInput)) {
             recentSearches.unshift(cityInput);
             localStorage.setItem("city", JSON.stringify(recentSearches));
@@ -114,17 +121,18 @@ $(document).ready(function () {
         if(recentSearches) {
             for (let i = 0; i < recentSearches.length; i++) {
                 var recentBtn = $("<button>");
-                recentBtn.attr("class", "btn btn-secondary");
+                recentBtn.attr("class", "col-12 m-1 btn btn-secondary recent-btn");
                 recentBtn.attr("type", "button");
                 recentBtn.attr("value", recentSearches[i]);
                 recentBtn.text(recentSearches[i]);
+                $(".recent-btn").click(searchRecent);
                 $("#recentBtns").append(recentBtn);
             }
         }
-        // $("#recentBtns").on(click, searchRecent());
     };
 
     function searchRecent() {
+        console.log("clicked")
         var cityInput = this.value;
         currentWeather(cityInput);
     };
